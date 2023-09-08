@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
+import Navbar from "./Components/Navbar";
+import Home from "./Pages/Home";
+import AllRoutes from "./Routes/AllRoutes";
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline text-red-600">
-        Simple React Typescript Tailwind Sample
-      </h1>
-    </>
+    <div className="m-auto root-container">
+      <AllRoutes />
+    </div>
   );
 }
 
