@@ -47,7 +47,7 @@ function Home() {
     <>
       <Navbar />
       <section className="text-gray-600 body-font">
-        <div className="px-5 py-24 mx-auto">
+        <div className="px-5 py-12 mx-auto">
           <div className="flex flex-wrap w-full mb-20">
             <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
               <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
@@ -63,15 +63,20 @@ function Home() {
               one short video at a time.
             </p>
           </div>
-          <div className="flex flex-wrap -m-4">
+          <div className="flex flex-wrap m-4">
+            {videos.length === 0 && isLoading && (
+              <h1 className="text-gray-900 text-2xl title-font font-medium m-auto ">
+                <img src="./loader.gif" alt="" height={"20px"} width={"80px"} />
+              </h1>
+            )}
             {videos.length !== 0 && isLoading ? (
               <h1 className="text-gray-900 text-2xl title-font font-medium m-auto ">
-                Loading...
+                <img src="./loader.gif" alt="" height={"20px"} width={"80px"} />
               </h1>
             ) : (
               videos.map((item: any, i: number) => {
                 return (
-                  <div key={i} className="xl:w-1/4 md:w-1/2 p-4 ">
+                  <div key={i} className="xl:w-1/4 md:w-1/3 sm:w-1/2  p-4 ">
                     <img
                       onClick={() => {
                         handleCurrentVideo(item.postId);
