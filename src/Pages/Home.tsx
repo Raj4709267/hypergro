@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../Components/Pagination";
 import * as types from "../Redux/actionTypes";
+import Footer from "../Components/Footer";
 
 function Home() {
   const { videos, page, isLoading } = useSelector((store: any) => store);
@@ -63,12 +64,14 @@ function Home() {
               one short video at a time.
             </p>
           </div>
-          <div className="flex flex-wrap m-4">
-            {videos.length === 0 && isLoading && (
+          <div className="flex flex-wrap m-4 ">
+            {videos.length === 0 && isLoading ? (
               <h1 className="text-gray-900 text-2xl title-font font-medium m-auto ">
                 <img src="./loader.gif" alt="" height={"20px"} width={"80px"} />
               </h1>
-            )}
+            ) : videos.length === 0 ? (
+              <p>No Video</p>
+            ) : null}
             {videos.length !== 0 && isLoading ? (
               <h1 className="text-gray-900 text-2xl title-font font-medium m-auto ">
                 <img src="./loader.gif" alt="" height={"20px"} width={"80px"} />
@@ -93,6 +96,7 @@ function Home() {
         </div>
       </section>
       {videos.length > 0 && !isLoading && <Pagination />}
+      <Footer />
     </>
   );
 }
