@@ -26,7 +26,7 @@ function Home() {
       );
       dispatch({
         type: types.SUCCESS_GET_VIDEOS,
-        payload: res.data.data.posts,
+        payload: res?.data?.data?.posts,
       });
     } catch (err) {
       console.log(err);
@@ -82,7 +82,7 @@ function Home() {
                   <div key={i} className="xl:w-1/4 md:w-1/3 sm:w-1/2  p-4 ">
                     <img
                       onClick={() => {
-                        handleCurrentVideo(item.postId);
+                        handleCurrentVideo(item?.postId);
                       }}
                       className="h-300 rounded w-full object-cover object-center mb-6 cursor-pointer"
                       src={item.submission.thumbnail}

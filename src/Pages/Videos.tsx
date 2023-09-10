@@ -6,19 +6,28 @@ import {
   HiHeart,
   HiChatBubbleOvalLeftEllipsis,
 } from "react-icons/hi2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Videos = () => {
-  const [playVideo, setPlayVideo] = useState<any>(false);
   const { currentVideo } = useSelector((store: any) => store);
+  const [likeCount, setLikeCount] = useState(() => {
+    const storedLikeCount = localStorage.getItem(currentVideo?.postId);
+    return storedLikeCount
+      ? parseInt(storedLikeCount)
+      : currentVideo?.reaction?.count;
+  });
   const navigate = useNavigate();
-  console.log(currentVideo);
+
+  const handleLikeCount = () => {
+    const newLikeCount = likeCount + 1;
+    setLikeCount(newLikeCount);
+
+    localStorage.setItem(currentVideo?.postId, newLikeCount.toString());
+  };
   useEffect(() => {
-    console.log(currentVideo);
     if (Object.keys(currentVideo).length === 0) {
       navigate("/");
     }
-    setPlayVideo(true);
   }, []);
 
   return (
@@ -32,7 +41,7 @@ const Videos = () => {
             url={currentVideo?.submission?.mediaUrl}
             controls={true}
             light={currentVideo?.submission?.thumbnail}
-            playing={playVideo}
+            playing={true}
             width="310px"
             style={{
               boxShadow:
@@ -71,12 +80,13 @@ const Videos = () => {
                 gap: "12px",
               }}
             >
-              <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">
+              <button
+                onClick={handleLikeCount}
+                className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500"
+              >
                 <HiHeart fontSize={"1.2rem"} />
               </button>
-              <p className="leading-relaxed text-1xl">
-                {currentVideo?.reaction?.count}
-              </p>
+              <p className="leading-relaxed text-1xl">{likeCount}</p>
               <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">
                 <HiChatBubbleOvalLeftEllipsis fontSize={"1.2rem"} />
               </button>
