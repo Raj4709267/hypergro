@@ -17,6 +17,6 @@ The project is deployed and can be accessed at [deploed link](https://short-vid.
 
 ## Getting Started
 
-1. Clone the repository: `git clone https://github.com/Raj4709267/social_media.git`
+1. Clone the repository: `git clone https://github.com/Raj4709267/hypergro.git`
 2. Install dependencies: `npm install`
 3. Run app: `npm run start`
